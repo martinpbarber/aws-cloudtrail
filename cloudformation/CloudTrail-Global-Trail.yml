@@ -1,0 +1,31 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: >-
+  Create a CloudTrail trail for an account
+
+Parameters:
+  TrailName:
+    Type: String
+    Description: Name of CloudTrail trail to be created
+    Default: default
+    AllowedPattern: ^[-a-z0-9]+$
+  BucketName:
+    Type: String
+    Description: Name of the S3 bucket to be created
+    AllowedPattern: ^[-a-z0-9]+$
+  TopicName:
+    Type: String
+    Description: Name of the SNS topic to be created
+    AllowedPattern: ^[-a-z0-9]+$
+
+Resources:
+  Trail:
+    Type: AWS::CloudTrail::Trail
+    Properties:
+      TrailName: !Ref TrailName
+      IsLogging: true
+      IsMultiRegionTrail: true
+      IncludeGlobalServiceEvents: true
+      S3BucketName: !Ref BucketName
+      SnsTopicName: !Ref TopicName
