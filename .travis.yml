@@ -6,7 +6,7 @@ install:
 script:
 - make lint
 - make validate
-deploy:
+after_success:
 - make sync
 env:
   global:
