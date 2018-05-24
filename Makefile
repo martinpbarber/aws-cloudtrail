@@ -51,6 +51,11 @@ lint: $(TEMPLATES)
 validate: $(TEMPLATES)
 	$(foreach FILE, $^, $(AWS) cloudformation --region $(REGION) validate-template --template-body file://$(FILE);)
 
+# Sync to S3
+.PHONY: sync
+sync: $(TEMPLATES)
+	$(AWS) s3 sync --exclude '*' --include '*.yml' $(CFN_DIR)/. s3://${BUCKET}
+
 # Clean the workspace
 .PHONY: clean
 clean:
