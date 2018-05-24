@@ -37,7 +37,7 @@ Resources:
             Principal:
               Service: cloudtrail.amazonaws.com
             Action: 's3:PutObject'
-            Resource: !Join ['', !GetAtt Bucket.Arn, '/AWSLogs/*']
+            Resource: !Join ['', [!GetAtt Bucket.Arn, '/AWSLogs/*']]
             Condition:
               StringLike:
                 's3:x-xml-acl': 'bucket-owner-full-control'
