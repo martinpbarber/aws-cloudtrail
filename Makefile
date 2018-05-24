@@ -54,7 +54,7 @@ validate: $(TEMPLATES)
 # Sync to S3
 .PHONY: sync
 sync: $(TEMPLATES)
-	$(AWS) s3 sync --exclude '*' --include '*.yml' $(CFN_DIR)/. s3://${BUCKET}
+	$(AWS) s3 sync --exclude '*' --include '*.yml' $(CFN_DIR)/. s3://`$(AWS) cloudformation list-exports --query 'Exports[?Name==\`CloudFormation-Bucket\`].Value' --output text`
 
 # Clean the workspace
 .PHONY: clean
