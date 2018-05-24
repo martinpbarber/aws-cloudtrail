@@ -2,17 +2,17 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >-
-  Create a central S3 bucket and SNS topic for CloudTrail
+  Create a central S3 bucket and SNS topic for CloudTrail.
 
 Parameters:
   BucketName:
     Type: String
-    Description: Name of S3 bucket to be created
-    AllowedPattern: ^[-a-z0-9]+$
+    Description: Enter S3 bucket name
+    AllowedPattern: ^[a-z0-9][-a-z0-9]{1,61}[a-z0-9]$
   TopicName:
     Type: String
-    Description: Name of SNS topic to be created
-    AllowedPattern: ^[-a-z0-9]+$
+    Description: Enter SNS topic name
+    AllowedPattern: ^[-_a-zA-Z0-9]{3,256}$
 
 Resources:
   Bucket:

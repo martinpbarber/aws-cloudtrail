@@ -2,22 +2,24 @@
 AWSTemplateFormatVersion: '2010-09-09'
 
 Description: >-
-  Create a CloudTrail trail for an account
+  Create a CloudTrail trail for an account.
+  S3 bucket and SNS topic should already exist.
 
 Parameters:
   TrailName:
     Type: String
-    Description: Name of CloudTrail trail to be created
+    Description: Enter CloudTrail trail name
     Default: default
-    AllowedPattern: ^[-a-z0-9]+$
+    AllowedPattern: >-
+      ^(?!.*[-_.]{2})(?!(\d{1,3}\.){3}\d{1,3})[a-zA-Z0-9][-_\.a-zA-Z0-9]{1,126}[a-zA-Z0-9]$
   BucketName:
     Type: String
-    Description: Name of the S3 bucket to be created
-    AllowedPattern: ^[-a-z0-9]+$
+    Description: Enter existing S3 bucket name
+    AllowedPattern: ^[a-z0-9][-a-z0-9]{1,61}[a-z0-9]$
   TopicName:
     Type: String
-    Description: Name of the SNS topic to be created
-    AllowedPattern: ^[-a-z0-9]+$
+    Description: Enter existing SNS topic name
+    AllowedPattern: ^[-_a-zA-Z0-9]{3,256}$
 
 Resources:
   Trail:
